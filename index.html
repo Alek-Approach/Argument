@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 2 · Presenting an Argument — Listening, Speaking &amp; Pronunciation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F6F3;
+    --ink:#16232E;
+    --ink-soft:#42525E;
+    --mark:#FFE24B;          /* highlighter — stressed words */
+    --pause:#2E6E8E;         /* steel blue — pause notation */
+    --pause-soft:#E3EDF2;
+    --line:#D9DFDA;
+    --card:#FFFFFF;
+    --radius:14px;
+    --maxw:880px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Public Sans',system-ui,sans-serif;
+    font-size:17px;line-height:1.6;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+  /* ---------- header ---------- */
+  header{border-bottom:3px solid var(--ink);padding:44px 0 32px;background:var(--paper)}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--pause);margin-bottom:14px;
+  }
+  h1{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+    font-size:clamp(2.1rem,6vw,3.4rem);line-height:1.05;letter-spacing:-.01em;
+  }
+  h1 .pause-glyph{color:var(--pause);font-weight:400}
+  .header-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .tag{
+    font-family:'IBM Plex Mono',monospace;font-size:.75rem;
+    border:1.5px solid var(--ink);border-radius:999px;padding:4px 12px;
+  }
+  .tag.solid{background:var(--ink);color:var(--paper)}
+  .goals{margin-top:22px;max-width:640px;color:var(--ink-soft)}
+  .goals strong{color:var(--ink)}
+
+  /* ---------- lesson roadmap ---------- */
+  .roadmap{margin:34px 0 0}
+  .roadmap ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+  .roadmap li{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;font-size:.86rem;
+  }
+  .roadmap .mins{font-family:'IBM Plex Mono',monospace;color:var(--pause);font-weight:600;display:block;font-size:.75rem}
+
+  /* ---------- sections ---------- */
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  .sec-label{
+    display:flex;align-items:baseline;gap:14px;margin-bottom:8px;flex-wrap:wrap;
+  }
+  .sec-label .kind{
+    font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.12em;
+    text-transform:uppercase;background:var(--ink);color:var(--paper);
+    padding:4px 10px;border-radius:4px;
+  }
+  .sec-label .time{
+    font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--pause);
+  }
+  h2{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+    font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;margin-bottom:14px;
+  }
+  h3{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:600;
+    font-size:1.12rem;margin:26px 0 10px;
+  }
+  p{margin-bottom:12px}
+  .lead{color:var(--ink-soft);max-width:640px}
+
+  /* ---------- audio ---------- */
+  .audio-box{
+    background:var(--card);border:1.5px solid var(--ink);border-radius:var(--radius);
+    padding:18px 20px;margin:20px 0;
+  }
+  .audio-box .label{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.1em;
+    text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;
+  }
+  .audio-box .label::before{content:"🔊"}
+  audio{width:100%;display:block}
+  .audio-tip{font-size:.83rem;color:var(--ink-soft);margin-top:10px;margin-bottom:0}
+  .player{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .player button{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:.92rem;
+    border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);
+    border-radius:999px;padding:8px 18px;cursor:pointer;
+  }
+  .player button.ghost{background:transparent;color:var(--ink)}
+  .player button:disabled{opacity:.45;cursor:default}
+  .player button:focus-visible{outline:2px solid var(--pause);outline-offset:2px}
+  .player .rate-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--ink-soft);
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .player select{
+    font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--ink);
+    border:1.5px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--paper);
+  }
+  .now-line{
+    min-height:1.6em;margin:12px 0 0;font-size:.95rem;line-height:1.9;
+  }
+  .now-line .tg{background:var(--pause-soft)}
+  .own-audio{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+  .own-audio summary{
+    cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.78rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .own-audio input[type=file]{margin:12px 0;font-size:.85rem;display:block}
+  .tts-warn{font-size:.83rem;color:#8a2f2f;margin-top:10px;display:none}
+
+  /* ---------- transcript / thought groups (signature) ---------- */
+  details.transcript{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    margin:18px 0;overflow:hidden;
+  }
+  details.transcript summary{
+    cursor:pointer;padding:14px 20px;font-weight:700;
+    font-family:'Bricolage Grotesque',sans-serif;list-style:none;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  details.transcript summary::-webkit-details-marker{display:none}
+  details.transcript summary::after{content:"+";font-size:1.4rem;color:var(--pause);font-weight:400}
+  details[open].transcript summary::after{content:"–"}
+  .script{padding:6px 20px 22px}
+  .turn{margin:14px 0;line-height:2.05}
+  .turn .who{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-soft);display:block;line-height:1.4;
+  }
+  .tg{
+    background:var(--pause-soft);border-radius:6px;padding:2px 7px;
+    display:inline-block;margin:2px 0;
+  }
+  .sl{ /* pause slash */
+    font-family:'IBM Plex Mono',monospace;color:var(--pause);font-weight:600;
+    padding:0 5px;
+  }
+  .big-pause{
+    font-family:'IBM Plex Mono',monospace;color:var(--pause);font-size:.8rem;
+    border:1px dashed var(--pause);border-radius:999px;padding:1px 10px;margin:0 4px;
+  }
+  .st{ /* stressed word */
+    background:var(--mark);border-radius:4px;padding:0 4px;font-weight:700;
+  }
+  .legend{
+    display:flex;flex-wrap:wrap;gap:16px;font-size:.82rem;color:var(--ink-soft);
+    margin:14px 0 4px;
+  }
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+
+  /* ---------- vocabulary ---------- */
+  .vocab{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;margin:18px 0;
+  }
+  .vocab dl{display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;font-size:.94rem}
+  .vocab dt{font-weight:700}
+  .vocab dd{color:var(--ink-soft)}
+  @media (max-width:560px){.vocab dl{grid-template-columns:1fr}.vocab dd{margin-bottom:8px}}
+
+  /* ---------- questions & tasks ---------- */
+  .qlist{counter-reset:q;list-style:none}
+  .qlist>li{
+    counter-increment:q;position:relative;padding:0 0 6px 46px;margin-bottom:22px;
+  }
+  .qlist>li::before{
+    content:counter(q);position:absolute;left:0;top:0;
+    width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+    display:flex;align-items:center;justify-content:center;font-size:.95rem;
+  }
+  textarea{
+    width:100%;min-height:84px;margin-top:10px;padding:12px 14px;
+    border:1px solid var(--line);border-radius:10px;background:var(--card);
+    font-family:'Public Sans',sans-serif;font-size:.95rem;color:var(--ink);resize:vertical;
+  }
+  textarea:focus{outline:2px solid var(--pause);outline-offset:1px}
+  .note{
+    font-size:.85rem;color:var(--ink-soft);background:var(--pause-soft);
+    border-radius:10px;padding:12px 16px;margin:16px 0;
+  }
+  .note strong{color:var(--ink)}
+
+  .frame{
+    background:var(--card);border-left:4px solid var(--mark);border-radius:0 var(--radius) var(--radius) 0;
+    padding:16px 20px;margin:16px 0;font-size:1rem;
+  }
+  .frame .sl{padding:0 4px}
+
+  .topics{list-style:none;margin:14px 0}
+  .topics li{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:12px 16px;margin-bottom:8px;display:flex;gap:12px;align-items:baseline;
+  }
+  .topics li::before{content:"→";color:var(--pause);font-weight:700}
+
+  /* ---------- table ---------- */
+  table{width:100%;border-collapse:collapse;margin:16px 0;background:var(--card);border-radius:var(--radius);overflow:hidden;font-size:.93rem}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--ink);color:var(--paper);font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:.9rem}
+
+  /* ---------- timer ---------- */
+  .timer{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    background:var(--card);border:1.5px solid var(--ink);border-radius:var(--radius);
+    padding:14px 18px;margin:18px 0;
+  }
+  .timer .clock{
+    font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:600;min-width:118px;
+  }
+  .timer.done .clock{background:var(--mark);border-radius:8px;padding:0 8px}
+  .timer button{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:.92rem;
+    border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);
+    border-radius:999px;padding:8px 18px;cursor:pointer;
+  }
+  .timer button.ghost{background:transparent;color:var(--ink)}
+  .timer button:focus-visible{outline:2px solid var(--pause);outline-offset:2px}
+  .timer .tlabel{font-size:.85rem;color:var(--ink-soft)}
+
+  footer{padding:36px 0 60px;font-size:.8rem;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Approach · Listening, Speaking &amp; Pronunciation · Unit 2</div>
+    <h1>Presenting <span class="pause-glyph">/</span> an Argument <span class="pause-glyph">/</span></h1>
+    <div class="header-meta">
+      <span class="tag solid">Level B1+ – B2</span>
+      <span class="tag">100-minute class</span>
+      <span class="tag">Thought groups · Pausing · Stress</span>
+    </div>
+    <p class="goals">You will learn to <strong>use thought groups to structure an argument</strong>, <strong>pause for effect</strong>, and <strong>signal logic through stress and intonation</strong>.</p>
+
+    <div class="roadmap" aria-label="Lesson plan">
+      <ol>
+        <li><span class="mins">0–10 min</span>Warm-up &amp; key vocabulary</li>
+        <li><span class="mins">10–30 min</span>Listen In + Notice It</li>
+        <li><span class="mins">30–40 min</span>Pronunciation focus &amp; drill</li>
+        <li><span class="mins">40–60 min</span>Speaking Task A + pushback</li>
+        <li><span class="mins">60–80 min</span>Speaking Task B</li>
+        <li><span class="mins">80–95 min</span>Listen &amp; Respond</li>
+        <li><span class="mins">95–100 min</span>Wrap-up &amp; feedback</li>
+      </ol>
+    </div>
+  </div>
+</header>
+
+<!-- ================= WARM-UP / VOCAB ================= -->
+<section id="vocab">
+  <div class="wrap">
+    <div class="sec-label"><span class="kind">Before you listen</span><span class="time">≈ 10 min</span></div>
+    <h2>Key vocabulary</h2>
+    <p class="lead">These words appear in today's listening. Say each one aloud with your teacher and mark the stressed syllable.</p>
+    <div class="vocab">
+      <dl>
+        <dt>make a case for</dt><dd>give reasons why something is a good idea</dd>
+        <dt>eligible</dt><dd>allowed to do or receive something ("eligible to vote")</dd>
+        <dt>compelling</dt><dd>very convincing; hard to argue against</dd>
+        <dt>have a stake in</dt><dd>be personally affected by something; care about the result</dd>
+        <dt>mandatory</dt><dd>required — you must do it</dd>
+        <dt>resentment</dt><dd>an angry feeling because something seems unfair</dd>
+        <dt>structural change</dt><dd>changing the rules and systems, not just people's opinions</dd>
+      </dl>
+    </div>
+    <div class="note"><strong>Warm-up question:</strong> When you disagree with someone, how do you show that your point is important — with your words, or with your <em>voice</em>? Discuss with a partner for two minutes.</div>
+  </div>
+</section>
+
+<!-- ================= LISTEN IN ================= -->
+<section id="listen-in">
+  <div class="wrap">
+    <div class="sec-label"><span class="kind">👂 Listen In</span><span class="time">≈ 10 min</span></div>
+    <h2>A speaker makes an argument</h2>
+    <p class="lead"><strong>First listen:</strong> keep the transcript closed. Focus on <strong>meaning</strong> — what is the speaker's opinion, and how many reasons do they give? <strong>Second listen:</strong> open the transcript and follow the pauses.</p>
+
+    <div class="audio-box" data-narration="listenIn">
+      <div class="label">Audio 1 · Listen In</div>
+      <div class="player">
+        <button type="button" class="play">▶ Play narration</button>
+        <button type="button" class="ghost stop" disabled>■ Stop</button>
+        <label class="rate-label">Speed
+          <select class="rate">
+            <option value="0.8">Slow</option>
+            <option value="1" selected>Normal</option>
+          </select>
+        </label>
+      </div>
+      <p class="now-line" aria-live="polite"></p>
+      <p class="tts-warn">Your browser does not support built-in narration. Use the option below to load a recording.</p>
+      <details class="own-audio">
+        <summary>Teacher option · use your own recording instead</summary>
+        <input type="file" accept="audio/*" aria-label="Load an audio recording for Listen In">
+        <audio controls preload="none" hidden></audio>
+      </details>
+      <p class="audio-tip">The narration is generated by your browser and read with the same thought-group pauses as the transcript — no audio files required.</p>
+    </div>
+
+    <details class="transcript">
+      <summary>Transcript with thought groups (open after the first listen)</summary>
+      <div class="script">
+        <div class="legend">
+          <span><span class="tg">thought group</span></span>
+          <span><span class="sl">/</span> short pause</span>
+          <span><span class="big-pause">pause</span> long pause</span>
+          <span><span class="st">STRESS</span> stressed word</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">I want to make a case for something</span><span class="sl">/</span><span class="tg">that may be controversial.</span> <span class="big-pause">pause</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">Immigrants should be eligible to vote</span><span class="sl">/</span><span class="tg">in local elections.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">Here's my reasoning.</span><span class="sl">/</span><span class="tg"><span class="st">First</span> —</span><span class="sl">/</span><span class="tg">local elections determine</span><span class="sl">/</span><span class="tg">who controls schools,</span><span class="sl">/</span><span class="tg">housing policy,</span><span class="sl">/</span><span class="tg">and public safety.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">These are not abstract issues.</span><span class="sl">/</span><span class="tg">They affect immigrants <span class="st">directly</span>.</span><span class="sl">/</span><span class="tg">Every day.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg"><span class="st">Second</span> —</span><span class="sl">/</span><span class="tg">immigrants pay local taxes.</span><span class="sl">/</span><span class="tg">They pay for the schools</span><span class="sl">/</span><span class="tg">they cannot vote about.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg"><span class="st">Third</span> —</span><span class="sl">/</span><span class="tg">and <span class="st">this</span> is the argument I find most <span class="st">compelling</span> —</span><span class="sl">/</span><span class="tg">civic participation</span><span class="sl">/</span><span class="tg">builds community.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">A city where residents feel they have a stake</span><span class="sl">/</span><span class="tg">is a <span class="st">safer</span>,</span><span class="sl">/</span><span class="tg">more <span class="st">connected</span></span><span class="sl">/</span><span class="tg">city.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">I'm not claiming this is a simple question.</span><span class="sl">/</span><span class="tg">It isn't.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">But I <span class="st">am</span> claiming</span><span class="sl">/</span><span class="tg">that it is a question</span><span class="sl">/</span><span class="tg">worth asking.</span><span class="sl">/</span><span class="tg"><span class="st">Seriously.</span></span>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= NOTICE IT ================= -->
+<section id="notice-it">
+  <div class="wrap">
+    <div class="sec-label"><span class="kind">🔍 Notice It</span><span class="time">≈ 10 min</span></div>
+    <h2>How does it sound?</h2>
+    <p class="lead">Listen again with the transcript open. Then discuss with a partner and write short answers.</p>
+    <ol class="qlist">
+      <li>
+        Read the argument aloud with the pauses. Where does the speaker <strong>slow down</strong>? Where do they <strong>speed up</strong>? What does this pacing do for the argument's clarity?
+        <textarea placeholder="Write your notes here…"></textarea>
+      </li>
+      <li>
+        The speaker says: <em>"And <span class="st">THIS</span> is the argument I find most <span class="st">COMPELLING</span>."</em> Both words are stressed. What does stressing <strong>THIS</strong> tell the listener? What would change if those words were <em>not</em> stressed?
+        <textarea placeholder="Write your notes here…"></textarea>
+      </li>
+      <li>
+        The final four thought groups: <em>"But I am claiming <span class="sl">/</span> that it is a question <span class="sl">/</span> worth asking. <span class="sl">/</span> Seriously."</em> — each one lands separately. Why break one sentence into four groups? What effect does <strong>"Seriously."</strong> — a single-word thought group — create?
+        <textarea placeholder="Write your notes here…"></textarea>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= PRONUNCIATION FOCUS ================= -->
+<section id="pron-focus">
+  <div class="wrap">
+    <div class="sec-label"><span class="kind">🔊 Pronunciation Focus</span><span class="time">≈ 10 min</span></div>
+    <h2>Thought groups structure the logic</h2>
+    <p class="lead">In an argument, pauses do more than help understanding — they <strong>are</strong> the structure. A pause before <em>"but"</em> signals a change of direction. A pause after a key word lets it register. Short, separate thought groups at the end create finality and authority.</p>
+
+    <table>
+      <thead>
+        <tr><th>Marked example</th><th>What to notice</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="st">First</span> — <span class="sl">/</span> local elections determine <span class="sl">/</span> who controls schools.</td>
+          <td>The pause after <em>"First"</em> signals a list is coming; the pauses inside show the logic building step by step.</td>
+        </tr>
+        <tr>
+          <td>I'm not claiming this is simple. <span class="sl">/</span> It isn't.</td>
+          <td>Short and final — the brevity signals confidence and authority.</td>
+        </tr>
+        <tr>
+          <td>Worth asking. <span class="sl">/</span> <span class="st">Seriously.</span></td>
+          <td>Two tiny groups — the listener cannot rush past <em>"Seriously."</em></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Drill — say these aloud</h3>
+    <p>Mark the stressed syllable in CAPITALS, then practice in pairs. Exaggerate the pauses first, then make them natural.</p>
+    <div class="frame">
+      First — <span class="sl">/</span> Second — <span class="sl">/</span> and this is key — <span class="sl">/</span> Here's my reasoning. <span class="sl">/</span> I'm not claiming ___. <span class="sl">/</span> I <em>am</em> claiming ___. <span class="sl">/</span> Worth discussing. <span class="sl">/</span> Seriously.
+    </div>
+  </div>
+</section>
+
+<!-- ================= SPEAKING TASK A ================= -->
+<section id="task-a">
+  <div class="wrap">
+    <div class="sec-label"><span class="kind">🗣 Speaking Task A</span><span class="time">≈ 20 min</span></div>
+    <h2>2-minute argument</h2>
+    <p class="lead">Choose one topic. Take <strong>5 minutes</strong> to prepare notes (key words only — no full sentences). Then deliver a 2-minute argument, using thought-group pauses deliberately.</p>
+
+    <ul class="topics">
+      <li>Should employers be required to accommodate religious practices at work?</li>
+      <li>Should undocumented immigrants be eligible for in-state college tuition?</li>
+      <li>Is healthcare a right or a privilege?</li>
+    </ul>
+
+    <h3>Use this structure</h3>
+    <div class="frame">
+      Here's my reasoning. <span class="sl">/</span> First — <span class="sl">/</span> … Second — <span class="sl">/</span> … Third — and most importantly — <span class="sl">/</span> …
+    </div>
+    <div class="frame">
+      <strong>Close:</strong> I'm not claiming this is simple. <span class="sl">/</span> But I <em>am</em> claiming <span class="sl">/</span> it is worth taking seriously.
+    </div>
+
+    <div class="timer" data-seconds="120">
+      <span class="clock">2:00</span>
+      <button type="button" class="start">Start</button>
+      <button type="button" class="ghost reset">Reset</button>
+      <span class="tlabel">Speaking timer — 2 minutes</span>
+    </div>
+
+    <div class="note"><strong>👥 Partner pushback:</strong> after you finish, your partner gives you <strong>one</strong> piece of pushback (a counterargument or a hard question). Respond in 30 seconds — and keep your thought groups even under pressure.</div>
+
+    <div class="timer" data-seconds="30">
+      <span class="clock">0:30</span>
+      <button type="button" class="start">Start</button>
+      <button type="button" class="ghost reset">Reset</button>
+      <span class="tlabel">Pushback response — 30 seconds</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SPEAKING TASK B ================= -->
+<section id="task-b">
+  <div class="wrap">
+    <div class="sec-label"><span class="kind">🗣 Speaking Task B</span><span class="time">≈ 20 min</span></div>
+    <h2>An argument that matters to you</h2>
+    <p class="lead">Prepare a 2-minute argument about something you <strong>genuinely believe</strong> — about immigration, education, healthcare, or your own community.</p>
+
+    <ol class="qlist">
+      <li>
+        What is your position? State it in <strong>one clear sentence</strong>.
+        <textarea placeholder="My position is…"></textarea>
+      </li>
+      <li>
+        Give three reasons. Use <em>"First," "Second," "Third — and most importantly."</em> Write them in <strong>thought-group form</strong> — use / to mark your pauses.
+        <textarea placeholder="First — / … / Second — / … / Third — and most importantly — / …"></textarea>
+      </li>
+      <li>
+        Acknowledge the counterargument honestly. What would someone who disagrees say?
+        <textarea placeholder="Some people would say… / and I understand that. / But…"></textarea>
+      </li>
+      <li>
+        Close with a final thought that <strong>lands</strong>. Keep it short — one or two small thought groups.
+        <textarea placeholder="Worth asking. / Seriously."></textarea>
+      </li>
+    </ol>
+
+    <div class="timer" data-seconds="120">
+      <span class="clock">2:00</span>
+      <button type="button" class="start">Start</button>
+      <button type="button" class="ghost reset">Reset</button>
+      <span class="tlabel">Speaking timer — 2 minutes</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LISTEN & RESPOND ================= -->
+<section id="listen-respond">
+  <div class="wrap">
+    <div class="sec-label"><span class="kind">👂 Listen &amp; Respond</span><span class="time">≈ 15 min</span></div>
+    <h2>A careful counter-argument</h2>
+    <p class="lead">Listen and <strong>take notes</strong> — do not open the transcript yet. Then answer the questions in full sentences. Open the transcript only to check your answers.</p>
+
+    <div class="audio-box" data-narration="listenRespond">
+      <div class="label">Audio 2 · Listen &amp; Respond</div>
+      <div class="player">
+        <button type="button" class="play">▶ Play narration</button>
+        <button type="button" class="ghost stop" disabled>■ Stop</button>
+        <label class="rate-label">Speed
+          <select class="rate">
+            <option value="0.8">Slow</option>
+            <option value="1" selected>Normal</option>
+          </select>
+        </label>
+      </div>
+      <p class="now-line" aria-live="polite"></p>
+      <p class="tts-warn">Your browser does not support built-in narration. Use the option below to load a recording.</p>
+      <details class="own-audio">
+        <summary>Teacher option · use your own recording instead</summary>
+        <input type="file" accept="audio/*" aria-label="Load an audio recording for Listen and Respond">
+        <audio controls preload="none" hidden></audio>
+      </details>
+      <p class="audio-tip">The narration is generated by your browser and read with the same thought-group pauses as the transcript — no audio files required.</p>
+    </div>
+
+    <h3>Notes while listening</h3>
+    <textarea style="min-height:120px" placeholder="Key words only — position / evidence / three things that work / final message"></textarea>
+
+    <h3>Answer in full sentences</h3>
+    <ol class="qlist">
+      <li>
+        What is the speaker's argument? Is it against <em>diversity</em>, or against <em>mandatory training</em>? Be precise.
+        <textarea placeholder="The speaker argues that…"></textarea>
+      </li>
+      <li>
+        According to the research, what three things actually work? Write them in note form.
+        <textarea placeholder="1. …  2. …  3. …"></textarea>
+      </li>
+      <li>
+        The speaker says: <em>"Attitudes follow environments. <span class="sl">/</span> Environments can be designed."</em> — two short thought groups. What do the brevity and the parallel structure do for the argument?
+        <textarea placeholder="Write your answer here…"></textarea>
+      </li>
+    </ol>
+
+    <details class="transcript">
+      <summary>Transcript with thought groups (open to check your answers)</summary>
+      <div class="script">
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">I've been asked to make the case against</span><span class="sl">/</span><span class="tg">mandatory diversity training in the workplace.</span> <span class="big-pause">pause</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">I want to do that carefully —</span><span class="sl">/</span><span class="tg">because I believe in the <span class="st">goal</span>.</span><span class="sl">/</span><span class="tg">I don't believe in this <span class="st">method</span>.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">Here's the evidence.</span><span class="sl">/</span><span class="tg">Studies — including one from Harvard Business Review —</span><span class="sl">/</span><span class="tg">suggest that mandatory training</span><span class="sl">/</span><span class="tg">can actually increase resentment</span><span class="sl">/</span><span class="tg">when people feel forced to attend.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">The research on what <span class="st">does</span> work</span><span class="sl">/</span><span class="tg">points consistently to three things:</span><span class="sl">/</span><span class="tg">voluntary participation,</span><span class="sl">/</span><span class="tg">leadership modeling,</span><span class="sl">/</span><span class="tg">and structural change.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">My argument is this:</span><span class="sl">/</span><span class="tg">if you want inclusion,</span><span class="sl">/</span><span class="tg">mandate the <span class="st">structure</span>,</span><span class="sl">/</span><span class="tg">not the <span class="st">attitude</span>.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">Attitudes follow environments.</span><span class="sl">/</span><span class="tg">Environments can be designed.</span>
+        </div>
+        <div class="turn"><span class="who">Speaker</span>
+          <span class="tg">That's my case.</span><span class="sl">/</span><span class="tg">I'll take questions.</span>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= WRAP-UP ================= -->
+<section id="wrapup">
+  <div class="wrap">
+    <div class="sec-label"><span class="kind">✅ Wrap-up</span><span class="time">≈ 5 min</span></div>
+    <h2>Exit check</h2>
+    <p class="lead">Before you leave, say one sentence to your partner using deliberate thought groups:</p>
+    <div class="frame">
+      Today I learned <span class="sl">/</span> that pausing <span class="sl">/</span> is not silence. <span class="sl">/</span> It's <span class="st">structure</span>.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Copyright © 2011 Approach International Student Center, Inc. · Revised 03/19/2026 · Adapted for web use, B1+–B2 level.
+  </div>
+</footer>
+
+<script>
+  // ============ Built-in narration (Web Speech API) ============
+  // Each item: t = thought group text, p = pause after it (ms).
+  // Short pause (/) = 400ms · turn break = 700ms · long pause = 1300ms
+  var NARRATIONS = {
+    listenIn: [
+      {t:"I want to make a case for something", p:400},
+      {t:"that may be controversial.", p:1300},
+      {t:"Immigrants should be eligible to vote", p:400},
+      {t:"in local elections.", p:700},
+      {t:"Here's my reasoning.", p:400},
+      {t:"First —", p:450},
+      {t:"local elections determine", p:400},
+      {t:"who controls schools,", p:400},
+      {t:"housing policy,", p:400},
+      {t:"and public safety.", p:700},
+      {t:"These are not abstract issues.", p:400},
+      {t:"They affect immigrants directly.", p:400},
+      {t:"Every day.", p:700},
+      {t:"Second —", p:450},
+      {t:"immigrants pay local taxes.", p:400},
+      {t:"They pay for the schools", p:400},
+      {t:"they cannot vote about.", p:700},
+      {t:"Third —", p:450},
+      {t:"and this is the argument I find most compelling —", p:450},
+      {t:"civic participation", p:400},
+      {t:"builds community.", p:700},
+      {t:"A city where residents feel they have a stake", p:400},
+      {t:"is a safer,", p:400},
+      {t:"more connected", p:400},
+      {t:"city.", p:700},
+      {t:"I'm not claiming this is a simple question.", p:400},
+      {t:"It isn't.", p:700},
+      {t:"But I am claiming", p:400},
+      {t:"that it is a question", p:400},
+      {t:"worth asking.", p:500},
+      {t:"Seriously.", p:0}
+    ],
+    listenRespond: [
+      {t:"I've been asked to make the case against", p:400},
+      {t:"mandatory diversity training in the workplace.", p:1300},
+      {t:"I want to do that carefully —", p:450},
+      {t:"because I believe in the goal.", p:400},
+      {t:"I don't believe in this method.", p:700},
+      {t:"Here's the evidence.", p:400},
+      {t:"Studies — including one from Harvard Business Review —", p:450},
+      {t:"suggest that mandatory training", p:400},
+      {t:"can actually increase resentment", p:400},
+      {t:"when people feel forced to attend.", p:700},
+      {t:"The research on what does work", p:400},
+      {t:"points consistently to three things:", p:450},
+      {t:"voluntary participation,", p:400},
+      {t:"leadership modeling,", p:400},
+      {t:"and structural change.", p:700},
+      {t:"My argument is this:", p:450},
+      {t:"if you want inclusion,", p:400},
+      {t:"mandate the structure,", p:400},
+      {t:"not the attitude.", p:700},
+      {t:"Attitudes follow environments.", p:400},
+      {t:"Environments can be designed.", p:700},
+      {t:"That's my case.", p:400},
+      {t:"I'll take questions.", p:0}
+    ]
+  };
+
+  var ttsOK = 'speechSynthesis' in window;
+  var voices = [];
+  function loadVoices(){ voices = window.speechSynthesis.getVoices(); }
+  if (ttsOK) {
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }
+  function pickVoice(){
+    if (!voices.length) loadVoices();
+    // Prefer a natural en-US voice, then any English voice.
+    var pref = ['Google US English','Samantha','Microsoft Aria','Microsoft Zira'];
+    for (var i=0;i<pref.length;i++){
+      var v = voices.find(function(vv){ return vv.name.indexOf(pref[i]) === 0; });
+      if (v) return v;
+    }
+    return voices.find(function(v){ return /^en(-|_)US/i.test(v.lang); }) ||
+           voices.find(function(v){ return /^en/i.test(v.lang); }) || null;
+  }
+
+  document.querySelectorAll('.audio-box[data-narration]').forEach(function(box){
+    var script = NARRATIONS[box.dataset.narration] || [];
+    var playBtn = box.querySelector('.play');
+    var stopBtn = box.querySelector('.stop');
+    var rateSel = box.querySelector('.rate');
+    var nowLine = box.querySelector('.now-line');
+    var warn = box.querySelector('.tts-warn');
+    var playing = false;
+    var timeoutId = null;
+
+    if (!ttsOK) {
+      playBtn.disabled = true;
+      warn.style.display = 'block';
+    }
+
+    function setIdle(){
+      playing = false;
+      clearTimeout(timeoutId); timeoutId = null;
+      playBtn.textContent = '▶ Play narration';
+      stopBtn.disabled = true;
+      nowLine.innerHTML = '';
+    }
+
+    function stopAll(){
+      window.speechSynthesis.cancel();
+      setIdle();
+    }
+
+    function speakFrom(i){
+      if (!playing) return;
+      if (i >= script.length) { setIdle(); return; }
+      var seg = script[i];
+      nowLine.innerHTML = '<span class="tg">' + seg.t + '</span>';
+      var u = new SpeechSynthesisUtterance(seg.t);
+      u.rate = parseFloat(rateSel.value);
+      u.pitch = 1;
+      var v = pickVoice();
+      if (v) u.voice = v;
+      u.onend = function(){
+        if (!playing) return;
+        timeoutId = setTimeout(function(){ speakFrom(i + 1); }, seg.p);
+      };
+      u.onerror = function(){ setIdle(); };
+      window.speechSynthesis.speak(u);
+    }
+
+    playBtn.addEventListener('click', function(){
+      if (playing) { stopAll(); return; }
+      window.speechSynthesis.cancel(); // stop any other box
+      playing = true;
+      playBtn.textContent = '■ Stop';
+      stopBtn.disabled = false;
+      speakFrom(0);
+    });
+    stopBtn.addEventListener('click', stopAll);
+
+    // ---- Teacher option: load a local recording ----
+    var fileInput = box.querySelector('.own-audio input[type=file]');
+    var ownAudio = box.querySelector('.own-audio audio');
+    fileInput.addEventListener('change', function(){
+      var f = fileInput.files && fileInput.files[0];
+      if (!f) return;
+      stopAll();
+      ownAudio.src = URL.createObjectURL(f);
+      ownAudio.hidden = false;
+    });
+  });
+
+  // Stop narration when leaving the page
+  window.addEventListener('beforeunload', function(){
+    if (ttsOK) window.speechSynthesis.cancel();
+  });
+
+  // Speaking timers (in-memory only)
+  document.querySelectorAll('.timer').forEach(function (t) {
+    var total = parseInt(t.dataset.seconds, 10);
+    var remaining = total;
+    var clock = t.querySelector('.clock');
+    var startBtn = t.querySelector('.start');
+    var resetBtn = t.querySelector('.reset');
+    var interval = null;
+
+    function fmt(s) {
+      var m = Math.floor(s / 60);
+      var sec = s % 60;
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+    function render() { clock.textContent = fmt(remaining); }
+
+    startBtn.addEventListener('click', function () {
+      if (interval) { // pause
+        clearInterval(interval); interval = null;
+        startBtn.textContent = 'Resume';
+        return;
+      }
+      if (remaining <= 0) return;
+      t.classList.remove('done');
+      startBtn.textContent = 'Pause';
+      interval = setInterval(function () {
+        remaining--;
+        render();
+        if (remaining <= 0) {
+          clearInterval(interval); interval = null;
+          t.classList.add('done');
+          clock.textContent = 'TIME';
+          startBtn.textContent = 'Start';
+        }
+      }, 1000);
+    });
+
+    resetBtn.addEventListener('click', function () {
+      clearInterval(interval); interval = null;
+      remaining = total;
+      t.classList.remove('done');
+      startBtn.textContent = 'Start';
+      render();
+    });
+
+    render();
+  });
+</script>
+
+</body>
+</html>
